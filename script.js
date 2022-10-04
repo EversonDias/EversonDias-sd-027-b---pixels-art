@@ -1,5 +1,8 @@
 const paletteOfColor = document.getElementById('color-palette');
 const randomCollectButton = document.getElementById('button-random-color');
+let cor = [];
+
+
 
 function colorGenerator() {
   const letters = '0123456789ABCDEF';
@@ -12,24 +15,37 @@ function colorGenerator() {
 
 for (let index = 0; index < 4; index += 1) {
   let color = document.createElement('div');
-  color.classList.add('color');
+  color.className = 'color';
   color.id = index;
-  if (index === 0) {
-    color.style.backgroundColor = 'black';
+  if (localStorage.length === 4) {
+    if (color.id == 0) {
+      color.style.backgroundColor = '#000000';
+    } else {
+      color.style.backgroundColor = localStorage.getItem(color.id)
+    }
   } else {
-    color.style.background = colorGenerator();
+    fillColor(color)
   }
   paletteOfColor.appendChild(color);
 }
 
-randomCollectButton.addEventListener('click',()=>{
-  let color = document.getElementsByClassName('color')
-  for (let index = 0; index < 4; index += 1) {
-    if (index === 0) {
-      color[index].style.backgroundColor = 'black';
-      
-    } else {
-      color[index].style.background = colorGenerator();
-    }
+function fillColor(color) {
+  let colorRandom = colorGenerator()
+  if (color.id == 0) {
+    color.style.backgroundColor = '#000000';
+  } else {
+    color.style.backgroundColor = colorRandom;
+  }
+  savePaletteColor(color.id, colorRandom)
+}
+
+randomCollectButton.addEventListener('click', () => {
+  for (let index = 0; index < 4; index++) {
+    let color = document.getElementById(index);
+    fillColor(color)
   }
 })
+
+function savePaletteColor(position, color) {
+  localStorage.setItem(position, color)
+}
