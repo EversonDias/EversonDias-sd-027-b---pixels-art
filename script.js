@@ -32,8 +32,7 @@ for (let index = 0; index < 4; index += 1) {
 }
 
 function changeColor(e) {
-  
-  for (let index = 0; index < 4; index ++) {
+  for (let index = 0; index < 4; index++) {
     let color = document.getElementById(index);
     if (color.id == e.target.id) {
       e.target.classList.add('selected');
@@ -41,9 +40,8 @@ function changeColor(e) {
       color.classList.remove('selected');
     }
   }
-  
-}
 
+}
 
 function fillColor(color) {
   let colorRandom = colorGenerator()
@@ -67,13 +65,27 @@ function savePaletteColor(position, color) {
   localStorage.setItem(position, color)
 }
 
-for (let index = 0; index < lines; index++) {
-  container.innerHTML += '<br>';
-  for (let index = 0; index < columns; index++) {
+for (let line = 0; line < lines; line++) {
+  let row = document.createElement('div');
+  for (let column = 0; column < columns; column++) {
     let pixel = document.createElement('div');
     pixel.classList.add('pixel');
     pixel.classList.add('inline');
+    pixel.id = `${line}${column}`
     pixel.style.backgroundColor = 'white';
-    container.appendChild(pixel);
+    pixel.addEventListener("click", toPaint);
+    row.appendChild(pixel)
+    container.appendChild(row);
   }
+}
+
+function toPaint(e) {
+  let color = document.getElementsByClassName('selected');
+  for (let index = 0; index < 4; index++) {
+    if (color[index]) {
+      let paint = color[index].style.backgroundColor;
+      e.target.style.backgroundColor = paint;
+    }
+  }
+  
 }
