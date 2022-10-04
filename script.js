@@ -1,7 +1,8 @@
 const paletteOfColor = document.getElementById('color-palette');
 const randomCollectButton = document.getElementById('button-random-color');
-let cor = [];
-
+const container = document.getElementById('pixel-board');
+let lines = 5
+let columns = 5
 
 
 function colorGenerator() {
@@ -48,4 +49,16 @@ randomCollectButton.addEventListener('click', () => {
 
 function savePaletteColor(position, color) {
   localStorage.setItem(position, color)
+}
+// container.style.display = 'grid';
+// container.style.gridColumn = columns;
+for (let index = 0; index < lines; index ++) {
+    container.innerHTML += '<br>'
+  for (let index = 0; index < columns; index ++) {
+    let pixel = document.createElement('div');
+    pixel.classList.add('pixel');
+    pixel.classList.add('inline');
+    pixel.style.backgroundColor = 'white';
+    container.appendChild(pixel);
+  }
 }
