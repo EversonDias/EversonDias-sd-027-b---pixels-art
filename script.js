@@ -1,9 +1,8 @@
 const paletteOfColor = document.getElementById('color-palette');
 const randomCollectButton = document.getElementById('button-random-color');
 const container = document.getElementById('pixel-board');
-let lines = 5
-let columns = 5
-
+let lines = 5;
+let columns = 5;
 
 function colorGenerator() {
   const letters = '0123456789ABCDEF';
@@ -18,9 +17,11 @@ for (let index = 0; index < 4; index += 1) {
   let color = document.createElement('div');
   color.className = 'color';
   color.id = index;
+  color.addEventListener("click", changeColor)
   if (localStorage.length === 4) {
     if (color.id == 0) {
       color.style.backgroundColor = '#000000';
+      color.classList.add('selected');
     } else {
       color.style.backgroundColor = localStorage.getItem(color.id)
     }
@@ -30,10 +31,25 @@ for (let index = 0; index < 4; index += 1) {
   paletteOfColor.appendChild(color);
 }
 
+function changeColor(e) {
+  
+  for (let index = 0; index < 4; index ++) {
+    let color = document.getElementById(index);
+    if (color.id == e.target.id) {
+      e.target.classList.add('selected');
+    } else {
+      color.classList.remove('selected');
+    }
+  }
+  
+}
+
+
 function fillColor(color) {
   let colorRandom = colorGenerator()
   if (color.id == 0) {
     color.style.backgroundColor = '#000000';
+    color.classList.add('selected');
   } else {
     color.style.backgroundColor = colorRandom;
   }
@@ -50,11 +66,10 @@ randomCollectButton.addEventListener('click', () => {
 function savePaletteColor(position, color) {
   localStorage.setItem(position, color)
 }
-// container.style.display = 'grid';
-// container.style.gridColumn = columns;
-for (let index = 0; index < lines; index ++) {
-    container.innerHTML += '<br>'
-  for (let index = 0; index < columns; index ++) {
+
+for (let index = 0; index < lines; index++) {
+  container.innerHTML += '<br>';
+  for (let index = 0; index < columns; index++) {
     let pixel = document.createElement('div');
     pixel.classList.add('pixel');
     pixel.classList.add('inline');
