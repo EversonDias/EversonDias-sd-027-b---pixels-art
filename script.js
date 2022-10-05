@@ -43,14 +43,14 @@ function positionOfIndex() {
   const position = [];
   for (let index = 0; index < obj.length; index += 1) {
     if (index % 2 !== 0) {
-      return position.push(index);
+      position.push(index);
     }
   }
+  return position;
 }
 
 function fillColor(color) {
   const position = positionOfIndex();
-
   if (color.id === '0') {
     color.style.backgroundColor = obj[position[color.id]] || '#000000';
     color.classList.add('selected');
@@ -68,7 +68,6 @@ for (let index = 0; index < 4; index += 1) {
   color.id = index;
   color.addEventListener('click', changeColor);
   fillColor(color);
-
   paletteOfColor.appendChild(color);
 }
 
