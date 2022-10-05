@@ -1,8 +1,10 @@
 const paletteOfColor = document.getElementById('color-palette');
 const randomCollectButton = document.getElementById('button-random-color');
 const container = document.getElementById('pixel-board');
+const clear = document.getElementById('clear-board');
 let lines = 5;
 let columns = 5;
+let id= 0;
 
 function colorGenerator() {
   const letters = '0123456789ABCDEF';
@@ -61,6 +63,15 @@ randomCollectButton.addEventListener('click', () => {
   }
 })
 
+clear.addEventListener('click',() => {
+  let pixel = document.getElementsByClassName('pixel')
+  console.log(pixel);
+  for (let index = 0; index < pixel.length; index++) {
+    console.log(index);
+    pixel[index].style.backgroundColor = 'white';
+  }
+})
+
 function savePaletteColor(position, color) {
   localStorage.setItem(position, color)
 }
@@ -71,11 +82,12 @@ for (let line = 0; line < lines; line++) {
     let pixel = document.createElement('div');
     pixel.classList.add('pixel');
     pixel.classList.add('inline');
-    pixel.id = `${line}${column}`
+    pixel.id = id;
     pixel.style.backgroundColor = 'white';
     pixel.addEventListener("click", toPaint);
     row.appendChild(pixel)
     container.appendChild(row);
+    id ++;
   }
 }
 
