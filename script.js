@@ -2,9 +2,12 @@ const paletteOfColor = document.getElementById('color-palette');
 const randomCollectButton = document.getElementById('button-random-color');
 const container = document.getElementById('pixel-board');
 const clear = document.getElementById('clear-board');
+const save = document.getElementById('save');
 let lines = 5;
 let columns = 5;
-let id= 0;
+let id = 0;
+
+// loader()
 
 function colorGenerator() {
   const letters = '0123456789ABCDEF';
@@ -63,14 +66,14 @@ randomCollectButton.addEventListener('click', () => {
   }
 })
 
-clear.addEventListener('click',() => {
+clear.addEventListener('click', () => {
   let pixel = document.getElementsByClassName('pixel')
-  console.log(pixel);
   for (let index = 0; index < pixel.length; index++) {
-    console.log(index);
     pixel[index].style.backgroundColor = 'white';
   }
 })
+
+save.addEventListener('click', savePixelBoard);
 
 function savePaletteColor(position, color) {
   localStorage.setItem(position, color)
@@ -87,9 +90,26 @@ for (let line = 0; line < lines; line++) {
     pixel.addEventListener("click", toPaint);
     row.appendChild(pixel)
     container.appendChild(row);
-    id ++;
+    id++;
   }
 }
+
+// function loader() {
+if (localStorage.getItem('pixelBoard') !== null) {
+  let pixel = document.getElementsByClassName('pixel');
+  let save = localStorage.getItem('pixelBoard');
+  let saveObg = JSON.parse(save);
+  let color = [];
+  for (let index = 0; index < saveObg.length; index++) {
+    if (index % 2 !== 0) {
+      color.push(saveObg[index]);
+    }
+  }
+  for (let index = 0; index < pixel.length; index++) {
+    pixel[index].style.backgroundColor = color[index];
+  }
+}
+// }
 
 function toPaint(e) {
   let color = document.getElementsByClassName('selected');
@@ -99,5 +119,15 @@ function toPaint(e) {
       e.target.style.backgroundColor = paint;
     }
   }
-  
+  savePixelBoard()
+}
+
+function savePixelBoard() {
+  let pixel = document.getElementsByClassName('pixel')
+  let save = [];
+  for (let index = 0; index < pixel.length; index++) {
+    save.push(pixel[index]);
+    save.push(pixel[index].style.backgroundColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(save))
 }
