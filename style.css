@@ -1,5 +1,5 @@
 body {
-  background-image: url(wallpaper.jpg);
+  background-image: url('./wallpaper.jpg');
   background-size: cover;
 }
 
@@ -9,7 +9,7 @@ body {
 }
 
 #color-palette {
-text-align: center;
+  text-align: center;
 }
 
 .color {
@@ -20,15 +20,9 @@ text-align: center;
 }
 
 .option-button {
-text-align: center;
-margin-top: 2rem;
-margin-bottom: 2rem;
-}
-
-#button-random-color {
-  margin-left: 0.5rem;
-  width: 7rem;
-  height: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .inline {
@@ -48,6 +42,7 @@ margin-bottom: 2rem;
 }
 
 #button-random-color {
+  margin-left: 0.5rem;
   width: 8rem;
   height: 1.5rem;
   border: none;
@@ -85,6 +80,6 @@ margin-bottom: 2rem;
 }
 
 .selected {
-  background-image: url(selected.png);
+  background-image: url('./selected.png');
   background-size: contain;
 }
