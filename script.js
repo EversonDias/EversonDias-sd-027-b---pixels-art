@@ -49,14 +49,18 @@ function positionOfIndex() {
   return position;
 }
 
+function paint(index, position, colorOfDiv) {
+  color[index].style.backgroundColor = obj[position[index]] || colorOfDiv;
+}
+
 function fillColor(index) {
   const position = positionOfIndex();
   if (index === 0) {
-    color[index].style.backgroundColor = obj[position[index]] || '#000000';
+    paint(index, position, '#000000');
     color[index].classList.add('selected');
     saveArray(index, obj[position[index]] || color[index].style.backgroundColor);
   } else {
-    color[index].style.backgroundColor = obj[position[index]] || colorGenerator();
+    paint(index, position, colorGenerator());
     saveArray(index, obj[position[index]] || color[index].style.backgroundColor);
   }
   savePaletteColor(arrayColor);
@@ -96,8 +100,8 @@ function savePixelBoard() {
 function toPaint(e) {
   for (let index = 0; index < 4; index += 1) {
     if (color[index].classList[1] === 'selected') {
-      const paint = color[index].style.backgroundColor;
-      e.target.style.backgroundColor = paint;
+      const paintColor = color[index].style.backgroundColor;
+      e.target.style.backgroundColor = paintColor;
     }
   }
   savePixelBoard();
