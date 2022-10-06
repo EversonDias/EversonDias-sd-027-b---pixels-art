@@ -1,6 +1,15 @@
 body {
   background-image: url('./wallpaper.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media ( max-width : 1800px ) {
+
+  body {
+    background-size: auto;
+    background-position: center;
+  }
 }
 
 #title {
