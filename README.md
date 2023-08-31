@@ -39,7 +39,7 @@ você precisa ter Instalado o npm e o nodejs.
 1. Clone o Projeto
 
 ```bash
-git clone https://github.com/EversonDias/Project_Trybe_HTML_CSS_and_JavaScript_Pixel_Art.git PixelArt
+git clone https://github.com/EversonDias/Pixel_Art_with_HTML_CSS_and_JavaScript.git PixelArt
 ```
 
 2. Entre no projeto
